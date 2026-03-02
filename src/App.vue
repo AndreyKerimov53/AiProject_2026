@@ -1,30 +1,30 @@
 <template>
   <v-app>
-    <v-navigation-drawer permanent>
-      <v-list-item title="My Application" subtitle="Vuetify"></v-list-item>
-      <v-divider></v-divider>
-      <v-list-item link title="List Item 1"></v-list-item>
-      <v-list-item link title="List Item 2"></v-list-item>
-      <v-list-item link title="List Item 3"></v-list-item>
-    </v-navigation-drawer>
+    <!-- Боковое меню -->
+    <v-navigation-drawer app></v-navigation-drawer>
     
-    <v-app-bar app color="primary">
-      <template v-slot:prepend>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      </template>
-
-      <v-app-bar-title>Application Bar</v-app-bar-title>
+    <!-- Верхняя панель -->
+    <v-app-bar app dark color="primary">
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       
       <v-spacer></v-spacer>
+      
+      <!-- Кнопки в панели -->
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn variant="text">Link One</v-btn>
-        <v-btn variant="text">Link Two</v-btn>
-        <v-btn variant="text">Link Three</v-btn>
+        <v-btn>
+          <v-icon start icon="mdi-gift-outline"></v-icon>
+          Link One
+        </v-btn>
+        <v-btn>Link Two</v-btn>
+        <v-btn>Link Three</v-btn>
       </v-toolbar-items>
     </v-app-bar>
     
+    <!-- Основная область -->
     <v-main>
-      <v-chip>Chip</v-chip>
+      <v-container>
+        <!-- Здесь будет контент -->
+      </v-container>
     </v-main>
   </v-app>
 </template>
