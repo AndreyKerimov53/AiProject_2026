@@ -4,9 +4,9 @@
       <v-col cols="12" sm="8" lg="6">
         <h1 class="text--secondary mb-3 mt-3">My ads</h1>
         
-        <!-- Список объявлений с данными -->
+        <!-- Список объявлений с данными из store -->
         <v-card 
-          v-for="ad in ads" 
+          v-for="ad in myAds" 
           :key="ad.id" 
           class="mb-3" 
           max-width="1000"
@@ -47,38 +47,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      ads: [
-        {
-          title: "First",
-          desc: "First Desc - это более длинное описание для проверки верстки и того как текст обрезается с многоточием",
-          promo: true,
-          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
-          id: "1"
-        },
-        {
-          title: "Second",
-          desc: "Second Desc",
-          promo: true,
-          src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
-          id: "2"
-        },
-        {
-          title: "Third",
-          desc: "Third Desc",
-          promo: true,
-          src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
-          id: "3"
-        },
-        {
-          title: "Fourth",
-          desc: "Fourth Desc",
-          promo: true,
-          src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
-          id: "4"
-        }
-      ]
+  computed: {
+    myAds() {
+      return this.$store.getters.myAds
     }
   }
 }
