@@ -17,11 +17,12 @@
       <!-- Разделитель -->
       <v-divider></v-divider>
 
-      <!-- Динамическое меню в дровере -->
+      <!-- Динамическое меню в дровере с ссылками -->
       <v-list dense>
         <v-list-item
           v-for="link in links"
           :key="link.title"
+          :to="link.url"
         >
           <template v-slot:prepend>
             <v-icon :icon="link.icon"></v-icon>
@@ -37,12 +38,13 @@
       
       <v-spacer></v-spacer>
       
-      <!-- Динамическое меню в хедере -->
+      <!-- Динамическое меню в хедере с ссылками -->
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
           v-for="link in links"
           :key="link.title"
-          variant="text"
+          :to="link.url"
+          text
         >
           <v-icon
             start
