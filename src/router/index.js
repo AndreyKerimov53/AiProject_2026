@@ -15,6 +15,7 @@ const routes = [
   },
   {
     path: "/ad/:id",
+    props: true,  // <-- ДОБАВЛЯЕМ ЭТУ СТРОКУ
     name: "ad",
     component: AdView
   },

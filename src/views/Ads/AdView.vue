@@ -3,30 +3,24 @@
     <v-row>
       <v-col cols="12">
         <v-card class="mt-5">
-          <!-- Картинка -->
+          <!-- Картинка из данных объявления -->
           <v-img
-            height="300px"
-            src="https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg"
+            height="400px"
+            :src="ad.src"
+            cover
           ></v-img>
 
-          <!-- Текст -->
+          <!-- Текст из данных объявления -->
           <v-card-text>
-            <h1 class="text--primary mb-3">Lorem Ipsum</h1>
-            <p>
-              Lorem Ipsum has been the industry's unknown printer took a galley of type and 
-              scrambled it to make a type specimen book. It has survived not only five centuries, 
-              but also the leap into electronic typesetting, remaining essentially unchanged. 
-              It was popularised in the 1960s with the release of Letraset sheets containing 
-              Lorem Ipsum passages, and more recently with desktop publishing software like 
-              Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
+            <h1 class="text--primary mb-3">{{ ad.title }}</h1>
+            <p>{{ ad.desc }}</p>
           </v-card-text>
 
           <!-- Кнопки -->
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text class="warning">Edit</v-btn>
-            <v-btn class="success">Buy</v-btn>
+            <v-btn class="warning" color="orange">Edit</v-btn>
+            <v-btn class="success" color="green">Buy</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -36,8 +30,10 @@
 
 <script>
 export default {
-  data() {
-    return {
+  props: ['id'],
+  computed: {
+    ad() {
+      return this.$store.getters.adById(this.id)
     }
   }
 }
