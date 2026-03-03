@@ -17,27 +17,29 @@ export default {
     }
   },
   actions: {
-    registerUser({ commit }, { email, password }) {
-      // Очищаем предыдущие ошибки
+    async registerUser({ commit }, { email, password }) {
       commit('clearError')
-      // Включаем лоадер
       commit('setLoading', true)
+      
+      // Здесь выполняется запрос на сервер
+      let isRequestOk = true // Меняй на false для проверки ошибки
+      
+      let promise = new Promise(function(resolve) {
+        setTimeout(() => resolve('Done'), 3000)
+      })
 
-      // Имитация запроса к серверу 
-      setTimeout(() => {
-        try {
-          // Успешная регистрация
-          const user = new User(1, email, password)
-          commit('setUser', user)
+      if (isRequestOk) {
+        await promise.then(() => {
+          commit('setUser', new User(1, email, password))
           commit('setLoading', false)
-          console.log('User registered:', user)
-        } catch (error) {
-          // Ошибка регистрации
+        })
+      } else {
+        await promise.then(() => {
           commit('setLoading', false)
-          commit('setError', error.message || 'Registration failed')
-          throw error
-        }
-      }, 2000) 
+          commit('setError', 'Ошибка регистрации')
+          throw new Error('Упс... Ошибка регистрации')
+        })
+      }
     }
   },
   getters: {
