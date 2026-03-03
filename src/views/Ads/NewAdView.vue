@@ -3,7 +3,6 @@
     <v-row>
       <v-col cols="8" offset="2">
         <h1 class="text--secondary mb-3 mt-3">Create Ad</h1>
-        
         <v-form v-model="valid" ref="form" validation>
           <v-text-field
             name="title"
@@ -12,7 +11,6 @@
             v-model="title"
             :rules="[v => !!v || 'Title is required']"
           ></v-text-field>
-          
           <v-textarea
             name="description"
             label="Ad Description"
@@ -57,6 +55,8 @@
             <v-btn
               color="success"
               @click="createAd"
+              :loading="loading"
+              :disabled="!valid || loading"
             >Create Ad</v-btn>
           </v-flex>
         </v-layout>
@@ -73,6 +73,11 @@ export default {
       title: "",
       description: "",
       promo: false
+    }
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.loading
     }
   },
   methods: {
