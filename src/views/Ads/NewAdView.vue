@@ -75,17 +75,23 @@
 export default {
   data() {
     return {
+      valid: false,
       title: "",
       description: "",
-      promo: false,
-      valid: false,
+      promo: true,
       loading: false
     }
   },
   methods: {
     createAd() {
-      // Здесь будет логика создания объявления
-      console.log('Create Ad clicked')
+      if (this.$refs.form.validate()) {
+        const ad = {
+          title: this.title,
+          desc: this.description,
+          promo: this.promo
+        }
+        console.log(ad)
+      }
     }
   }
 }
