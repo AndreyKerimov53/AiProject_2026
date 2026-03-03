@@ -29,6 +29,17 @@
           </template>
           <v-list-item-title>{{ link.title }}</v-list-item-title>
         </v-list-item>
+        
+        <!-- Кнопка Logout в дровере -->
+        <v-list-item
+          @click="onLogout"
+          v-if="isUserLoggedIn"
+        >
+          <template v-slot:prepend>
+            <v-icon icon="mdi-exit-to-app"></v-icon>
+          </template>
+          <v-list-item-title>Logout</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     
@@ -59,6 +70,19 @@
           ></v-icon>
           {{ link.title }}
         </v-btn>
+        
+        <!-- Кнопка Logout в хедере -->
+        <v-btn
+          @click="onLogout"
+          v-if="isUserLoggedIn"
+          variant="text"
+        >
+          <v-icon
+            start
+            icon="mdi-exit-to-app"
+          ></v-icon>
+          Logout
+        </v-btn>
       </v-toolbar-items>
     </v-app-bar>
     
@@ -69,7 +93,7 @@
       </v-container>
     </v-main>
 
-    <!-- для отображения ошибок -->
+    <!-- Снекбар для отображения ошибок -->
     <v-snackbar
       v-model="error"
       multi-line
@@ -98,11 +122,9 @@ export default {
     }
   },
   computed: {
-    // Проверка авторизации
     isUserLoggedIn() {
       return this.$store.getters.isUserLoggedIn
     },
-    // Динамическое меню в зависимости от авторизации
     links() {
       if (this.isUserLoggedIn) {
         return [
@@ -124,6 +146,10 @@ export default {
   methods: {
     closeError() {
       this.$store.dispatch('clearError')
+    },
+    onLogout() {
+      this.$store.dispatch('logoutUser')
+      this.$router.push("/")
     }
   }
 }

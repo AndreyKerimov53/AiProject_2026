@@ -21,9 +21,7 @@ export default {
       commit('clearError')
       commit('setLoading', true)
       
-      // Здесь выполняется запрос на сервер
       let isRequestOk = true
-      
       let promise = new Promise(function(resolve) {
         setTimeout(() => resolve('Done'), 3000)
       })
@@ -47,7 +45,6 @@ export default {
       commit('setLoading', true)
       
       let isRequestOk = true
-      
       let promise = new Promise(function(resolve) {
         setTimeout(() => resolve('Done'), 3000)
       })
@@ -64,13 +61,16 @@ export default {
           throw new Error('Упс... Ошибка логина или пароля')
         })
       }
+    },
+    
+    logoutUser({ commit }) {
+      commit('setUser', null)
     }
   },
   getters: {
     user(state) {
       return state.user
     },
-    
     isUserLoggedIn(state) {
       return state.user !== null
     }
