@@ -38,6 +38,16 @@ export default {
   mutations: {
     createAd(state, payload) {
       state.ads.push(payload)
+    },
+    loadAds(state, payload) {
+      state.ads = payload
+    },
+    updateAd(state, { title, desc, id }) {
+      const ad = state.ads.find(a => {
+        return a.id === id
+      })
+      ad.title = title
+      ad.desc = desc
     }
   },
   actions: {
@@ -63,6 +73,28 @@ export default {
           commit('setLoading', false)
           commit('setError', 'Ошибка создания объявления')
           throw new Error('Упс... Ошибка создания объявления')
+        })
+      }
+    },
+    async updateAd({ commit }, { title, desc, id }) {
+      commit('clearError')
+      commit('setLoading', true)
+      
+      let isRequestOk = true
+      let promise = new Promise(function(resolve) {
+        resolve('Done')
+      })
+      
+      if (isRequestOk) {
+        await promise.then(() => {
+          commit('updateAd', { title, desc, id })
+          commit('setLoading', false)
+        })
+      } else {
+        await promise.then(() => {
+          commit('setLoading', false)
+          commit('setError', 'Ошибка редактирования объявления')
+          throw new Error('Упс... Ошибка редактирования объявления')
         })
       }
     }
