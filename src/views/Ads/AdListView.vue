@@ -4,7 +4,7 @@
       <v-col cols="12" sm="8" lg="6">
         <h1 class="text--secondary mb-3 mt-3">My ads</h1>
         
-        <!-- Список объявлений -->
+        <!-- Список объявлений с данными -->
         <v-card 
           v-for="ad in ads" 
           :key="ad.id" 
@@ -52,7 +52,7 @@ export default {
       ads: [
         {
           title: "First",
-          desc: "First Desc",
+          desc: "First Desc - это более длинное описание для проверки верстки и того как текст обрезается с многоточием",
           promo: true,
           src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
           id: "1"
