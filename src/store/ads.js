@@ -7,7 +7,7 @@ export default {
         promo: true,
         src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
         id: "1",
-        userId: "1"  
+        userId: "1"
       },
       {
         title: "Second",
@@ -15,7 +15,7 @@ export default {
         promo: true,
         src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
         id: "2",
-        userId: "1" 
+        userId: "1"
       },
       {
         title: "Third",
@@ -23,7 +23,7 @@ export default {
         promo: true,
         src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
         id: "3",
-        userId: "1"  d
+        userId: "1"
       },
       {
         title: "Fourth",
@@ -31,7 +31,7 @@ export default {
         promo: true,
         src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
         id: "4",
-        userId: "1"  
+        userId: "1"
       }
     ]
   },
@@ -41,9 +41,31 @@ export default {
     }
   },
   actions: {
-    createAd({ commit }, payload) {
+    async createAd({ commit, getters }, payload) {
       payload.id = Math.random()
-      commit('createAd', payload)
+      payload.userId = getters.user != null ? getters.user.id : '1'
+      
+      commit('clearError')
+      commit('setLoading', true)
+      
+      // Заглушка запроса
+      let isRequestOk = true
+      let promise = new Promise(function(resolve) {
+        setTimeout(() => resolve('Done'), 3000)
+      })
+      
+      if (isRequestOk) {
+        await promise.then(() => {
+          commit('createAd', payload)
+          commit('setLoading', false)
+        })
+      } else {
+        await promise.then(() => {
+          commit('setLoading', false)
+          commit('setError', 'Ошибка создания объявления')
+          throw new Error('Упс... Ошибка создания объявления')
+        })
+      }
     }
   },
   getters: {
