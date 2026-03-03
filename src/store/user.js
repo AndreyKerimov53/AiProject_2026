@@ -18,8 +18,26 @@ export default {
   },
   actions: {
     registerUser({ commit }, { email, password }) {
-      // Здесь будет запрос на сервер для регистрации
-      commit('setUser', new User(1, email, password))
+      // Очищаем предыдущие ошибки
+      commit('clearError')
+      // Включаем лоадер
+      commit('setLoading', true)
+
+      // Имитация запроса к серверу 
+      setTimeout(() => {
+        try {
+          // Успешная регистрация
+          const user = new User(1, email, password)
+          commit('setUser', user)
+          commit('setLoading', false)
+          console.log('User registered:', user)
+        } catch (error) {
+          // Ошибка регистрации
+          commit('setLoading', false)
+          commit('setError', error.message || 'Registration failed')
+          throw error
+        }
+      }, 2000) 
     }
   },
   getters: {
