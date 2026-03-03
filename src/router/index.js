@@ -6,6 +6,7 @@ import NewAdView from '../views/Ads/NewAdView.vue'
 import LoginView from '../views/Auth/LoginView.vue'
 import RegistrationView from '../views/Auth/RegistrationView.vue'
 import OrdersView from '../views/User/OrdersView.vue'
+import AuthGuard from './auth_guard'  // Импортируем защиту
 
 const routes = [
   {
@@ -15,19 +16,21 @@ const routes = [
   },
   {
     path: "/ad/:id",
-    props: true,  // <-- ДОБАВЛЯЕМ ЭТУ СТРОКУ
+    props: true,
     name: "ad",
     component: AdView
   },
   {
     path: "/list",
     name: "list",
-    component: AdListView
+    component: AdListView,
+    beforeEnter: AuthGuard  // Защищенный маршрут
   },
   {
     path: "/new",
     name: "newAd",
-    component: NewAdView
+    component: NewAdView,
+    beforeEnter: AuthGuard  // Защищенный маршрут
   },
   {
     path: "/login",
@@ -42,7 +45,8 @@ const routes = [
   {
     path: "/orders",
     name: "orders",
-    component: OrdersView
+    component: OrdersView,
+    beforeEnter: AuthGuard  
   }
 ]
 
