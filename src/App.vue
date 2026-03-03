@@ -69,7 +69,7 @@
       </v-container>
     </v-main>
 
-    <!-- для отображения ошибок  -->
+    <!-- для отображения ошибок -->
     <v-snackbar
       v-model="error"
       multi-line
@@ -94,17 +94,29 @@ export default {
   name: 'App',
   data() {
     return {
-      drawer: false,
-      links: [
-        {title: "Login", icon: "mdi-gift-outline", url: "/login"},
-        {title: "Registration", icon: "mdi-gift-outline", url: "/registration"},
-        {title: "Orders", icon: "mdi-gift-outline", url: "/orders"},
-        {title: "New ad", icon: "mdi-gift-outline", url: "/new"},
-        {title: "My ads", icon: "mdi-gift-outline", url: "/list"}
-      ]
+      drawer: false
     }
   },
   computed: {
+    // Проверка авторизации
+    isUserLoggedIn() {
+      return this.$store.getters.isUserLoggedIn
+    },
+    // Динамическое меню в зависимости от авторизации
+    links() {
+      if (this.isUserLoggedIn) {
+        return [
+          {title: "Orders", icon: "mdi-gift-outline", url: "/orders"},
+          {title: "New ad", icon: "mdi-gift-outline", url: "/new"},
+          {title: "My ads", icon: "mdi-gift-outline", url: "/list"}
+        ]
+      } else {
+        return [
+          {title: "Login", icon: "mdi-gift-outline", url: "/login"},
+          {title: "Registration", icon: "mdi-gift-outline", url: "/registration"}
+        ]
+      }
+    },
     error() {
       return this.$store.getters.error
     }
