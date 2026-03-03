@@ -17,7 +17,7 @@
       <!-- Разделитель -->
       <v-divider></v-divider>
 
-      <!-- Динамическое меню в дровере с ссылками -->
+      <!-- Динамическое меню в дровере -->
       <v-list dense>
         <v-list-item
           v-for="link in links"
@@ -36,15 +36,22 @@
     <v-app-bar app dark color="primary">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       
+      <!-- Ссылка на главную страницу -->
+      <v-toolbar-title>
+        <v-btn to="/" variant="text">
+          Home
+        </v-btn>
+      </v-toolbar-title>
+      
       <v-spacer></v-spacer>
       
-      <!-- Динамическое меню в хедере с ссылками -->
+      <!-- Динамическое меню в хедере -->
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn
           v-for="link in links"
           :key="link.title"
           :to="link.url"
-          text
+          variant="text"
         >
           <v-icon
             start
