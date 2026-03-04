@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Первая область - Carousel -->
     <v-container fluid>
       <v-layout row>
         <v-flex xs12>
@@ -21,7 +20,6 @@
       </v-layout>
     </v-container>
 
-    <!-- Вторая область - Grid с карточками -->
     <v-container grid-list-lg>
       <v-layout row wrap>
         <v-flex
@@ -42,12 +40,8 @@
             </v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn text :to="'/ad/' + ad.id">
-                Open
-              </v-btn>
-              <v-btn raised color="primary">
-                Buy
-              </v-btn>
+              <v-btn text :to="'/ad/' + ad.id">Open</v-btn>
+              <buy-ad-modal :ad="ad"></buy-ad-modal>
             </v-card-actions>
           </v-card>
         </v-flex>
